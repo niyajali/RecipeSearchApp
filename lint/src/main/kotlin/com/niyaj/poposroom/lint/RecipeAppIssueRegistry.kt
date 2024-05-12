@@ -36,7 +36,7 @@ class RecipeAppIssueRegistry : IssueRegistry() {
     override val minApi: Int = 12
 
     override val vendor: Vendor = Vendor(
-        vendorName = "Popos Room",
+        vendorName = "RecipeSearchApp",
         feedbackUrl = "https://github.com/niyajali/RecipeApp/issues",
         contact = "https://github.com/niyajali/RecipeApp",
     )

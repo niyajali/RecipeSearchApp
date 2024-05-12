@@ -1,4 +1,6 @@
 pluginManagement {
+    includeBuild("build-logic")
+
     repositories {
         google {
             content {
@@ -19,6 +21,24 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Recipe Search App"
+rootProject.name = "RecipeSearchApp"
+
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":app")
- 
+include(":lint")
+include(":benchmarks")
+include(":ui-test-hilt-manifest")
+
+include(":core:ui")
+include(":core:data")
+include(":core:designsystem")
+include(":core:model")
+include(":core:domain")
+include(":core:network")
+include(":core:common")
+include(":core:testing")
+include(":core:database")
+include(":core:data-test")
+include(":core:analytics")
+
+include(":feature")

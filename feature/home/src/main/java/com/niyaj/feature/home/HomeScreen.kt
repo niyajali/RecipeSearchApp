@@ -173,7 +173,7 @@ fun LazyListScope.allRecipesCard(
             item.id
         },
     ) { index, item ->
-        if ((index + thresholds) >= recipeList.size && isLoading) {
+        if ((index + thresholds) >= recipeList.size && !isLoading) {
             fetchNextRecipeList()
         }
 

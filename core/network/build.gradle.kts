@@ -43,13 +43,21 @@ secrets {
 dependencies {
     api(libs.kotlinx.datetime)
     api(projects.core.common)
-    api(projects.core.model)
 
     implementation(libs.coil.kt)
     implementation(libs.coil.kt.svg)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.okhttp.logging)
     implementation(libs.retrofit.core)
+    implementation(libs.retrofit.converter.moshi)
+
+    implementation(libs.sandwich)
+    implementation(libs.sandwich.retrofit)
+
+    // json parsing
+    implementation(libs.moshi)
+    ksp(libs.moshi.codegen)
+
     implementation(libs.retrofit.kotlin.serialization)
 
     testImplementation(libs.kotlinx.coroutines.test)

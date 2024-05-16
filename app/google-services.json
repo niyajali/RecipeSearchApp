@@ -1,0 +1,125 @@
+{
+  "project_info": {
+    "project_number": "301764120702",
+    "project_id": "recipesearchapp-2cf53",
+    "storage_bucket": "recipesearchapp-2cf53.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:301764120702:android:55d1bd729418d520d8482f",
+        "android_client_info": {
+          "package_name": "com.niyaj.recipesearchapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbEyD4bFaGV_MnV2IZ1GznAY4qu1YINAo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:301764120702:android:55d1bd729418d520d8482f",
+        "android_client_info": {
+          "package_name": "com.niyaj.recipesearchapp.demo.debug"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbEyD4bFaGV_MnV2IZ1GznAY4qu1YINAo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:301764120702:android:55d1bd729418d520d8482f",
+        "android_client_info": {
+          "package_name": "com.niyaj.recipesearchapp.demo.benchmark"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbEyD4bFaGV_MnV2IZ1GznAY4qu1YINAo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:301764120702:android:55d1bd729418d520d8482f",
+        "android_client_info": {
+          "package_name": "com.niyaj.recipesearchapp.benchmark"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbEyD4bFaGV_MnV2IZ1GznAY4qu1YINAo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:301764120702:android:55d1bd729418d520d8482f",
+        "android_client_info": {
+          "package_name": "com.niyaj.recipesearchapp.debug"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbEyD4bFaGV_MnV2IZ1GznAY4qu1YINAo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:301764120702:android:55d1bd729418d520d8482f",
+        "android_client_info": {
+          "package_name": "com.niyaj.recipesearchapp.demo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbEyD4bFaGV_MnV2IZ1GznAY4qu1YINAo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+
+  "configuration_version": "1"
+}

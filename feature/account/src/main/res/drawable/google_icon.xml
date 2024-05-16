@@ -1,0 +1,27 @@
+<!--
+  ~ /*
+  ~  * Copyright 2024 Sk Niyaj Ali
+  ~  *
+  ~  * Licensed under the Apache License, Version 2.0 (the "License");
+  ~  * you may not use this file except in compliance with the License.
+  ~  * You may obtain a copy of the License at
+  ~  *
+  ~  *     https://www.apache.org/licenses/LICENSE-2.0
+  ~  *
+  ~  * Unless required by applicable law or agreed to in writing, software
+  ~  * distributed under the License is distributed on an "AS IS" BASIS,
+  ~  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  * See the License for the specific language governing permissions and
+  ~  * limitations under the License.
+  ~  */
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="18dp"
+    android:height="18dp"
+    android:viewportWidth="18"
+    android:viewportHeight="18">
+  <path
+      android:pathData="M8.956,7.356V10.807H13.748C13.302,13 11.435,14.26 8.956,14.26C6.069,14.22 3.749,11.868 3.749,8.98C3.749,6.093 6.069,3.741 8.956,3.701C10.156,3.7 11.319,4.116 12.246,4.879L14.846,2.279C11.864,-0.343 7.508,-0.68 4.158,1.451C0.807,3.583 -0.733,7.671 0.378,11.484C1.489,15.296 4.985,17.916 8.956,17.914C13.423,17.914 17.485,14.665 17.485,8.98C17.478,8.433 17.411,7.888 17.285,7.355L8.956,7.356Z"
+      android:fillColor="#ffffff"/>
+</vector>

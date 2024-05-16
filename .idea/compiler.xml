@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="17" />
+    <bytecodeTargetLevel target="11">
+      <module name="Recipe_Search_App.app" target="17" />
+      <module name="Recipe_Search_App.benchmarks" target="17" />
+      <module name="Recipe_Search_App.core.analytics" target="17" />
+      <module name="Recipe_Search_App.core.common" target="17" />
+      <module name="Recipe_Search_App.core.data" target="17" />
+      <module name="Recipe_Search_App.core.data-test" target="17" />
+      <module name="Recipe_Search_App.core.database" target="17" />
+      <module name="Recipe_Search_App.core.datastore" target="17" />
+      <module name="Recipe_Search_App.core.datastore-proto" target="17" />
+      <module name="Recipe_Search_App.core.datastore-test" target="17" />
+      <module name="Recipe_Search_App.core.designsystem" target="17" />
+      <module name="Recipe_Search_App.core.domain" target="17" />
+      <module name="Recipe_Search_App.core.model" target="17" />
+      <module name="Recipe_Search_App.core.network" target="17" />
+      <module name="Recipe_Search_App.core.notification" target="17" />
+      <module name="Recipe_Search_App.core.screenshot-testing" target="17" />
+      <module name="Recipe_Search_App.core.testing" target="17" />
+      <module name="Recipe_Search_App.core.ui" target="17" />
+      <module name="Recipe_Search_App.ui-test-hilt-manifest" target="17" />
+      <module name="RecipeSearchApp.core.datastore-test" target="17" />
+      <module name="RecipeSearchApp.core.notification" target="17" />
+      <module name="RecipeSearchApp.core.screenshot-testing" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>

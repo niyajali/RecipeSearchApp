@@ -1,0 +1,17 @@
+
+syntax = "proto3";
+
+option java_package = "com.niyaj.core.datastore";
+option java_multiple_files = true;
+
+message UserPreferences {
+  map<string, bool> bookmarked_recipe_ids = 1;
+
+  bool has_done_list_to_map_migration = 2;
+
+  bool should_hide_onboarding = 3;
+
+  bool use_dynamic_color = 4;
+
+  // NEXT AVAILABLE ID: 5
+}

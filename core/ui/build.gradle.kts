@@ -37,6 +37,8 @@ dependencies {
     api(projects.core.designsystem)
     api(projects.core.model)
 
+    api(libs.accompanist.swiperefresh)
+
     implementation(libs.androidx.browser)
     implementation(libs.coil.kt)
     implementation(libs.coil.kt.compose)

@@ -21,12 +21,12 @@ package com.niyaj.feature.search
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.niyaj.core.common.result.Result
 import com.niyaj.core.data.repository.RecipeRepository
 import com.niyaj.core.model.SearchResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
@@ -47,9 +47,17 @@ class SearchViewModel @Inject constructor(
             flowOf(SearchUIState.Empty)
         } else {
             repository.searchRecipes(query).mapLatest {
-                if (it.isEmpty()) SearchUIState.Empty else SearchUIState.Success(it)
-            }.catch {
-                SearchUIState.Error(it.message.toString())
+                when (it) {
+                    is Result.Error -> SearchUIState.Error(it.exception.message.toString())
+                    is Result.Loading -> SearchUIState.Loading
+                    is Result.Success -> {
+                        if (it.data.isEmpty()) {
+                            SearchUIState.Empty
+                        } else {
+                            SearchUIState.Success(it.data)
+                        }
+                    }
+                }
             }
         }
     }.stateIn(

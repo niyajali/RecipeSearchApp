@@ -19,6 +19,7 @@
 package com.niyaj.feature.home
 
 import android.annotation.SuppressLint
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -36,7 +37,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -77,17 +77,12 @@ fun HomeScreenRoute(
     onClickRecipe: (Int) -> Unit,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val recipeList by viewModel.randomRecipeList.collectAsStateWithLifecycle()
-    val popularRecipes by viewModel.popularRecipes.collectAsStateWithLifecycle()
-    val pagerState = rememberPagerState { popularRecipes.size }
+    val recipeListState by viewModel.randomRecipeList.collectAsStateWithLifecycle()
+    val popularRecipesState by viewModel.popularRecipes.collectAsStateWithLifecycle()
 
     HomeScreenContent(
-        uiState = uiState,
-        pagerState = pagerState,
-        popularRecipes = popularRecipes,
-        recipeList = recipeList,
-        fetchNextRecipeList = {},
+        recipeListState = recipeListState,
+        popularRecipes = popularRecipesState,
         onClickSearch = onClickSearch,
         onClickRecipe = onClickRecipe,
     )
@@ -96,11 +91,8 @@ fun HomeScreenRoute(
 @Composable
 private fun HomeScreenContent(
     modifier: Modifier = Modifier,
-    uiState: HomeUiState,
-    pagerState: PagerState,
-    popularRecipes: List<Recipe>,
-    recipeList: List<Recipe>,
-    fetchNextRecipeList: () -> Unit,
+    recipeListState: HomeUiState,
+    popularRecipes: HomeUiState,
     onClickRecipe: (Int) -> Unit,
     onClickSearch: () -> Unit,
 ) {
@@ -126,37 +118,22 @@ private fun HomeScreenContent(
             }
 
             popularRecipesCard(
-                pagerState =pagerState,
-                popularRecipes = popularRecipes,
-                onClickRecipe = onClickRecipe
+                uiState = popularRecipes,
+                onClickRecipe = onClickRecipe,
             )
 
             allRecipesCard(
-                isLoading = uiState is HomeUiState.Loading,
-                recipeList = recipeList,
-                fetchNextRecipeList = fetchNextRecipeList,
-                onClickRecipe = onClickRecipe
+                uiState = recipeListState,
+                onClickRecipe = onClickRecipe,
             )
-        }
-
-        if (uiState is HomeUiState.Loading) {
-            LoadingIndicator()
-        }
-
-        if (uiState is HomeUiState.Error) {
-            StandardErrorMessage(message = uiState.message.toString())
         }
     }
 }
 
 fun LazyListScope.allRecipesCard(
-    isLoading: Boolean,
-    recipeList: List<Recipe>,
-    fetchNextRecipeList: () -> Unit,
+    uiState: HomeUiState,
     onClickRecipe: (Int) -> Unit,
 ) {
-    val thresholds = 8
-
     item {
         Spacer(modifier = Modifier.height(12.dp))
 
@@ -167,26 +144,40 @@ fun LazyListScope.allRecipesCard(
         )
     }
 
-    itemsIndexed(
-        items = recipeList,
-        key = { _, item ->
-            item.id
-        },
-    ) { index, item ->
-        if ((index + thresholds) >= recipeList.size && !isLoading) {
-            fetchNextRecipeList()
+
+    when (uiState) {
+        is HomeUiState.Loading -> {
+            item {
+                LoadingIndicator(modifier = Modifier)
+            }
         }
 
-        RecipeCard(
-            recipe = item,
-            onClickRecipe = onClickRecipe,
-        )
+        is HomeUiState.Error -> {
+            item {
+                StandardErrorMessage(message = uiState.message.toString())
+            }
+        }
+
+        is HomeUiState.Success -> {
+            itemsIndexed(
+                items = uiState.data,
+                key = { _, item ->
+                    item.id
+                },
+            ) { _, item ->
+                RecipeCard(
+                    recipe = item,
+                    onClickRecipe = onClickRecipe,
+                )
+            }
+        }
+
     }
+
 }
 
 fun LazyListScope.popularRecipesCard(
-    pagerState: PagerState,
-    popularRecipes: List<Recipe>,
+    uiState: HomeUiState,
     onClickRecipe: (Int) -> Unit,
 ) {
     item {
@@ -200,13 +191,30 @@ fun LazyListScope.popularRecipesCard(
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        StandardHorizontalPager(
-            pagerState = pagerState
-        ) {
-            PopularRecipeCard(
-                recipe = popularRecipes[it],
-                onClickRecipe = onClickRecipe
-            )
+        Crossfade(
+            targetState = uiState,
+            label = "PopularRecipe::State",
+        ) { state ->
+            when (state) {
+                is HomeUiState.Loading -> Unit
+
+                is HomeUiState.Error -> {
+                    StandardErrorMessage(message = state.message.toString())
+                }
+
+                is HomeUiState.Success -> {
+                    val pagerState = rememberPagerState { state.data.size }
+
+                    StandardHorizontalPager(
+                        pagerState = pagerState,
+                    ) {
+                        PopularRecipeCard(
+                            recipe = state.data[it],
+                            onClickRecipe = onClickRecipe,
+                        )
+                    }
+                }
+            }
         }
     }
 }
@@ -244,7 +252,7 @@ fun UserCard(
                     .fillMaxWidth()
                     .clickable(
                         interactionSource = interactionSource,
-                        indication = null
+                        indication = null,
                     ) {
                         onSearchClick()
                     },
@@ -279,8 +287,8 @@ fun PopularRecipeCard(
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
                 .data(recipe.image)
-                .placeholder(R.drawable.image_placeholder)
-                .error(R.drawable.image_placeholder)
+                .placeholder(R.drawable.core_ui_image_placeholder)
+                .error(R.drawable.core_ui_image_placeholder)
                 .crossfade(true)
                 .build(),
             contentDescription = recipe.imageType,

@@ -21,13 +21,14 @@ package com.niyaj.feature.home
 import androidx.compose.runtime.Stable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.niyaj.core.common.result.Result
 import com.niyaj.core.data.repository.RecipeRepository
 import com.niyaj.core.model.Recipe
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
@@ -35,51 +36,43 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val repository: RecipeRepository,
 ) : ViewModel() {
-
-    internal val uiState: MutableStateFlow<HomeUiState> = MutableStateFlow(HomeUiState.Loading)
-
     private val fetchingIndex = MutableStateFlow(10)
 
     val popularRecipes = fetchingIndex.flatMapLatest { limit ->
         repository.getAllRandomRecipes(
             limit = limit,
-            onStart = { uiState.tryEmit(HomeUiState.Loading) },
-            onComplete = { uiState.tryEmit(HomeUiState.Idle) },
-            onError = { uiState.tryEmit(HomeUiState.Error(it)) },
         )
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5_000),
-        initialValue = emptyList(),
-    )
-
-    val randomRecipeList: StateFlow<List<Recipe>> = fetchingIndex.flatMapLatest { page ->
-        repository.getAllRandomRecipes(
-            limit = page,
-            onStart = { uiState.tryEmit(HomeUiState.Loading) },
-            onComplete = { uiState.tryEmit(HomeUiState.Idle) },
-            onError = { uiState.tryEmit(HomeUiState.Error(it)) },
-        )
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5_000),
-        initialValue = emptyList(),
-    )
-
-    fun fetchNextRecipeList() {
-        if (uiState.value != HomeUiState.Loading) {
-            fetchingIndex.value++
+    }.mapLatest {
+        when (it) {
+            is Result.Loading -> HomeUiState.Loading
+            is Result.Error -> HomeUiState.Error(it.exception.message)
+            is Result.Success -> HomeUiState.Success(it.data)
         }
-    }
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5_000),
+        initialValue = HomeUiState.Loading,
+    )
+
+    val randomRecipeList = fetchingIndex.flatMapLatest { page ->
+        repository.getAllRandomRecipes(limit = page)
+    }.mapLatest {
+        when (it) {
+            is Result.Loading -> HomeUiState.Loading
+            is Result.Error -> HomeUiState.Error(it.exception.message)
+            is Result.Success -> HomeUiState.Success(it.data)
+        }
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5_000),
+        initialValue = HomeUiState.Loading,
+    )
 }
 
 
 @Stable
 sealed interface HomeUiState {
-
-    data object Idle : HomeUiState
-
     data object Loading : HomeUiState
-
     data class Error(val message: String?) : HomeUiState
+    data class Success(val data: List<Recipe>) : HomeUiState
 }

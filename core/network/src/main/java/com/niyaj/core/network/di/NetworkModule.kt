@@ -52,9 +52,7 @@ object NetworkModule {
             .addNetworkInterceptor(
                 HttpLoggingInterceptor()
                     .apply {
-                        if (BuildConfig.DEBUG) {
-                            setLevel(HttpLoggingInterceptor.Level.BODY)
-                        }
+                        setLevel(HttpLoggingInterceptor.Level.BODY)
                     },
             )
             .build()

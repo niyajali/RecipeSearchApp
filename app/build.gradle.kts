@@ -47,6 +47,15 @@ android {
         }
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile = file("debug.keystore")
+            storePassword = "Niyajali@2k22"
+            keyAlias = "recipeapprealeasekey"
+            keyPassword = "Niyajali@2k22"
+        }
+    }
+
     buildTypes {
         debug {
             applicationIdSuffix = RecipeAppBuildType.DEBUG.applicationIdSuffix

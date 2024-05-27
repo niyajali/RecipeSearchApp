@@ -18,6 +18,7 @@
 
 package com.niyaj.feature.search
 
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -54,7 +55,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.niyaj.core.designsystem.component.StandardSearchBar
 import com.niyaj.core.designsystem.icon.RecipeAppIcons
 import com.niyaj.core.model.SearchResult
+import com.niyaj.core.ui.LoadingIndicator
 import com.niyaj.core.ui.R
+import com.niyaj.core.ui.StandardErrorMessage
 
 @Composable
 fun SearchRoute(
@@ -108,25 +111,28 @@ fun SearchScreen(
             focusRequester = focusRequester,
         )
 
-        when (uiState) {
-            is SearchUIState.Loading -> {
-                Text(text = "Search Item is Loading")
-            }
+        Crossfade(
+            targetState = uiState,
+            label = "SearchUi::State",
+        ) { state ->
+            when (state) {
+                is SearchUIState.Loading -> LoadingIndicator()
 
-            is SearchUIState.Empty -> {
-                Text(text = "Searched Item Not Found")
-            }
+                is SearchUIState.Empty -> {
+                    StandardErrorMessage(message = "No result founds")
+                }
 
-            is SearchUIState.Error -> {
-                Text(text = uiState.message)
-            }
+                is SearchUIState.Error -> {
+                    StandardErrorMessage(message = state.message)
+                }
 
-            is SearchUIState.Success -> {
-                SearchResultBody(
-                    searchQuery = searchQuery,
-                    results = uiState.data,
-                    onSearchItemClick = onSearchItemClick,
-                )
+                is SearchUIState.Success -> {
+                    SearchResultBody(
+                        searchQuery = searchQuery,
+                        results = state.data,
+                        onSearchItemClick = onSearchItemClick,
+                    )
+                }
             }
         }
 
@@ -184,7 +190,7 @@ fun SearchResultBodyItem(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Icon(
-                painter = painterResource(id = R.drawable.item_icon),
+                painter = painterResource(id = R.drawable.core_ui_item_icon),
                 contentDescription = "Search Item Icon",
             )
 

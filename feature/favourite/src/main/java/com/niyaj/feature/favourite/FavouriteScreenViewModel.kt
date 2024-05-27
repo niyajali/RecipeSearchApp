@@ -20,6 +20,7 @@ package com.niyaj.feature.favourite
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.niyaj.core.common.result.Result
 import com.niyaj.core.data.repository.RecipeRepository
 import com.niyaj.core.data.repository.UserDataRepository
 import com.niyaj.core.model.Recipe
@@ -38,11 +39,19 @@ class FavouriteScreenViewModel @Inject constructor(
 
 
     val favouriteList = userDataRepository.getFavouritesRecipe.flatMapLatest { list ->
-        repository.getFavouriteRecipes(list) {
-            FavouriteUiState.Error(it.toString())
-        }
+        repository.getFavouriteRecipes(list)
     }.mapLatest {
-        if (it.isEmpty()) FavouriteUiState.Empty else FavouriteUiState.Success(it)
+        when (it) {
+            is Result.Loading -> FavouriteUiState.Loading
+            is Result.Error -> FavouriteUiState.Error(it.exception.message.toString())
+            is Result.Success -> {
+                if (it.data.isEmpty()) {
+                    FavouriteUiState.Empty
+                } else {
+                    FavouriteUiState.Success(it.data)
+                }
+            }
+        }
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),

@@ -98,7 +98,7 @@ fun RecipeIngredientCard(
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(ingredient.image)
-                    .placeholder(R.drawable.image_placeholder)
+                    .placeholder(R.drawable.core_ui_image_placeholder)
                     .crossfade(true)
                     .build(),
                 contentDescription = ingredient.name,

@@ -22,6 +22,7 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.niyaj.core.common.result.Result
 import com.niyaj.core.data.repository.RecipeRepository
 import com.niyaj.core.data.repository.UserDataRepository
 import com.niyaj.core.model.Recipe
@@ -54,10 +55,14 @@ class RecipeDetailsViewModel @Inject constructor(
     )
 
     val recipeDetails = snapshotFlow { recipeId }.flatMapLatest { recipeId ->
-        repository.getRecipeDetails(recipeId, true) {
-            RecipeDetailsState.Error(it.toString())
-        }.mapLatest {
-            RecipeDetailsState.Success(it)
+        repository.getRecipeDetails(recipeId, true)
+    }.mapLatest {
+        when (it) {
+            is Result.Loading -> RecipeDetailsState.Loading
+            is Result.Error -> RecipeDetailsState.Error(it.exception.message.toString())
+            is Result.Success -> {
+                RecipeDetailsState.Success(it.data)
+            }
         }
     }.stateIn(
         scope = viewModelScope,
@@ -66,10 +71,12 @@ class RecipeDetailsViewModel @Inject constructor(
     )
 
     val nutritionDetails = snapshotFlow { recipeId }.flatMapLatest { recipeId ->
-        repository.getNutritionDetails(recipeId) {
-            NutritionDetailsState.Error(it.toString())
-        }.mapLatest {
-            NutritionDetailsState.Success(it)
+        repository.getNutritionDetails(recipeId)
+    }.mapLatest {
+        when (it) {
+            is Result.Loading -> NutritionDetailsState.Loading
+            is Result.Error -> NutritionDetailsState.Error(it.exception.message.toString())
+            is Result.Success -> NutritionDetailsState.Success(it.data)
         }
     }.stateIn(
         scope = viewModelScope,
@@ -78,10 +85,18 @@ class RecipeDetailsViewModel @Inject constructor(
     )
 
     val similarRecipes = snapshotFlow { recipeId }.flatMapLatest { recipeId ->
-        repository.getSimilarRecipes(recipeId, 10) {
-            SimilarRecipesState.Error(it.toString())
-        }.mapLatest {
-            if (it.isEmpty()) SimilarRecipesState.Empty else SimilarRecipesState.Success(it)
+        repository.getSimilarRecipes(recipeId, 10)
+    }.mapLatest {
+        when (it) {
+            is Result.Loading -> SimilarRecipesState.Loading
+            is Result.Error -> SimilarRecipesState.Error(it.exception.message.toString())
+            is Result.Success -> {
+                if (it.data.isEmpty()) {
+                    SimilarRecipesState.Empty
+                } else {
+                    SimilarRecipesState.Success(it.data)
+                }
+            }
         }
     }.stateIn(
         scope = viewModelScope,

@@ -22,6 +22,7 @@ import android.util.Log
 import androidx.annotation.WorkerThread
 import com.niyaj.core.common.network.Dispatcher
 import com.niyaj.core.common.network.RecipeAppDispatchers
+import com.niyaj.core.common.result.Result
 import com.niyaj.core.data.model.toNutritionDetails
 import com.niyaj.core.data.model.toRecipe
 import com.niyaj.core.data.model.toRecipeDetail
@@ -35,13 +36,13 @@ import com.niyaj.core.model.nutrition_details.NutritionDetails
 import com.niyaj.core.network.service.RecipeClient
 import com.skydoves.sandwich.getOrNull
 import com.skydoves.sandwich.message
-import com.skydoves.sandwich.onFailure
+import com.skydoves.sandwich.messageOrNull
+import com.skydoves.sandwich.suspendOnFailure
 import com.skydoves.sandwich.suspendOnSuccess
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onStart
 import javax.inject.Inject
 
@@ -54,31 +55,28 @@ class RecipeRepositoryImpl @Inject constructor(
     @WorkerThread
     override suspend fun getAllRandomRecipes(
         limit: Int,
-        onStart: () -> Unit,
-        onComplete: () -> Unit,
-        onError: (String?) -> Unit,
-    ): Flow<List<Recipe>> = flow {
+    ): Flow<Result<List<Recipe>>> = flow {
         recipeClient
             .getRandomRecipes(limit)
             .suspendOnSuccess {
-                emit(this.data.toRecipes())
-            }.onFailure {
-                Log.d("Tag", "Error - ${message()}")
-                onError(message())
+                emit(Result.Success(this.data.toRecipes()))
+            }.suspendOnFailure {
+                Log.d("suspendOnFailure", "suspendOnFailure - ${this.messageOrNull}")
+                emit(Result.Error(Throwable(message())))
             }
-    }.onStart { onStart() }.onCompletion { onComplete() }.flowOn(ioDispatcher)
+    }.onStart { emit(Result.Loading) }.flowOn(ioDispatcher)
 
 
-    override suspend fun searchRecipes(query: String): Flow<List<SearchResult>> {
+    override suspend fun searchRecipes(query: String): Flow<Result<List<SearchResult>>> {
         return flow {
             val result = recipeClient.searchRecipe(query)
 
             result.suspendOnSuccess {
-                emit(this.data.toSearchResult())
-            }.onFailure {
+                emit(Result.Success(this.data.toSearchResult()))
+            }.suspendOnFailure {
                 Log.d("Tag", message())
 
-                throw Exception(message())
+                emit(Result.Error(Throwable(message())))
             }
         }.flowOn(ioDispatcher)
     }
@@ -86,69 +84,68 @@ class RecipeRepositoryImpl @Inject constructor(
     override suspend fun getRecipeDetails(
         recipeId: Int,
         includeNutrition: Boolean,
-        onError: (String?) -> Unit,
-    ): Flow<RecipeDetails> {
+    ): Flow<Result<RecipeDetails>> {
         return flow {
             val result = recipeClient.getRecipeDetailsById(recipeId, includeNutrition)
+
             result.suspendOnSuccess {
-                emit(this.data.toRecipeDetail())
-            }.onFailure {
+                emit(Result.Success(this.data.toRecipeDetail()))
+            }.suspendOnFailure {
                 Log.d("Tag", message())
 
-                onError(message())
+                emit(Result.Error(Throwable(message())))
             }
         }.flowOn(ioDispatcher)
     }
 
     override suspend fun getNutritionDetails(
         recipeId: Int,
-        onError: (String?) -> Unit,
-    ): Flow<NutritionDetails> {
+    ): Flow<Result<NutritionDetails>> {
         return flow {
             val result = recipeClient.getNutritionDetails(recipeId)
 
             result.suspendOnSuccess {
-                emit(this.data.toNutritionDetails())
-            }.onFailure {
+                emit(Result.Success(this.data.toNutritionDetails()))
+            }.suspendOnFailure {
                 Log.d("Tag", message())
 
-                onError(message())
+                emit(Result.Error(Throwable(message())))
             }
         }.flowOn(ioDispatcher)
     }
 
     override suspend fun getFavouriteRecipes(
         recipesIds: List<String>,
-        onError: (String?) -> Unit,
-    ): Flow<List<Recipe>> {
+    ): Flow<Result<List<Recipe>>> {
         return flow {
-            val data = recipesIds.map {
+            recipesIds.map {
                 recipeClient.getRecipeDetailsById(it.toInt(), false)
-                    .onFailure {
+                    .suspendOnFailure {
                         Log.d("Tag", message())
-                        onError(message())
+
+                        emit(Result.Error(Throwable(message())))
                     }
             }.mapNotNull {
                 it.getOrNull()?.toRecipe()
-            }
 
-            emit(data)
+            }.let {
+                emit(Result.Success(it))
+            }
         }.flowOn(ioDispatcher)
     }
 
     override suspend fun getSimilarRecipes(
         recipeId: Int,
         limit: Int,
-        onError: (String?) -> Unit,
-    ): Flow<List<Recipe>> {
-        return flow<List<Recipe>> {
+    ): Flow<Result<List<Recipe>>> {
+        return flow {
             val result = recipeClient.getSimilarRecipes(recipeId, limit)
 
             result.suspendOnSuccess {
-                emit(data.toRecipes())
-            }.onFailure {
+                emit(Result.Success(data.toRecipes()))
+            }.suspendOnFailure {
                 Log.d("Tag", message())
-                onError(message())
+                emit(Result.Error(Throwable(message())))
             }
         }.flowOn(ioDispatcher)
     }

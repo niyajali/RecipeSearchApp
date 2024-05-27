@@ -70,8 +70,8 @@ fun RecipeCard(
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(recipe.image)
-                    .placeholder(R.drawable.image_placeholder)
-                    .error(R.drawable.image_placeholder)
+                    .placeholder(R.drawable.core_ui_image_placeholder)
+                    .error(R.drawable.core_ui_image_placeholder)
                     .crossfade(true)
                     .build(),
                 contentDescription = recipe.imageType,

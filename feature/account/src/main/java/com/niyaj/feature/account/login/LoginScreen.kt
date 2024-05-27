@@ -64,7 +64,7 @@ fun LoginScreenRoute(
 ) {
     LoginScreen(
         modifier = modifier,
-        backgroundImage = R.drawable.login_background,
+        backgroundImage = R.drawable.feature_account_login_background,
         onLoginClick = onLoginClick,
     )
 }
@@ -75,7 +75,7 @@ fun LoginScreenRoute(
 fun LoginScreen(
     modifier: Modifier = Modifier,
     @DrawableRes
-    backgroundImage: Int = R.drawable.login_background,
+    backgroundImage: Int = R.drawable.feature_account_login_background,
     onLoginClick: () -> Unit = {},
 ) {
     var sizeImage by remember { mutableStateOf(IntSize.Zero) }
@@ -162,7 +162,7 @@ fun LoginScreen(
 
                 PrimaryIconWithTextButton(
                     text = "Continue With Google",
-                    icon = R.drawable.google_icon,
+                    icon = R.drawable.feature_account_google_icon,
                     onClick = onLoginClick
                 )
             }

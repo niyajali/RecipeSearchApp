@@ -54,10 +54,11 @@ include(":core:model")
 include(":core:domain")
 include(":core:network")
 include(":core:common")
-include(":core:testing")
 include(":core:database")
 include(":core:datastore")
 include(":core:datastore-proto")
+
+include(":core:testing")
 include(":core:data-test")
 include(":core:analytics")
 

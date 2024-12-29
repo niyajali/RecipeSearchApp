@@ -32,12 +32,12 @@ plugins {
 
 android {
     namespace = "com.niyaj.recipesearchapp"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.niyaj.recipesearchapp"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 

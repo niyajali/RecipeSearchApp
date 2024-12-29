@@ -43,6 +43,9 @@ dependencies {
     compileOnly(libs.ksp.gradlePlugin)
     compileOnly(libs.room.gradlePlugin)
     implementation(libs.truth)
+
+    // Compose Gradle DSL Plugin
+    compileOnly(libs.compose.gradlePlugin)
 }
 
 tasks {
@@ -109,6 +112,22 @@ gradlePlugin {
         register("jvmLibrary") {
             id = "niyaj.jvm.library"
             implementationClass = "JvmLibraryConventionPlugin"
+        }
+
+
+        // KMP & CMP Plugins
+        register("cmpFeature") {
+            id = "niyaj.cmp.feature"
+            implementationClass = "CMPFeatureConventionPlugin"
+        }
+
+        register("kmpKoin") {
+            id = "niyaj.kmp.koin"
+            implementationClass = "KMPKoinConventionPlugin"
+        }
+        register("kmpLibrary") {
+            id = "niyaj.kmp.library"
+            implementationClass = "KMPLibraryConventionPlugin"
         }
     }
 }

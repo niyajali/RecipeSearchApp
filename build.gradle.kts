@@ -49,6 +49,13 @@ plugins {
     alias(libs.plugins.module.graph) apply true
     alias(libs.plugins.jetbrains.kotlin.android) apply false
     // Plugin applied to allow module graph generation
+
+    // Multiplatform plugins
+    alias(libs.plugins.jetbrainsCompose) apply false
+    alias(libs.plugins.compose.compiler) apply false
+    alias(libs.plugins.kotlinMultiplatform) apply false
+    alias(libs.plugins.wire) apply false
+    alias(libs.plugins.ktrofit) apply false
 }
 
 // Task to print all the module paths in the project e.g. :core:data

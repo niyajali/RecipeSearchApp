@@ -24,10 +24,9 @@ import com.niyaj.core.network.ktorHttpClient
 import com.niyaj.core.network.utils.BaseURL
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.auth.Auth
-import io.ktor.http.headers
 import org.koin.dsl.module
 
-val networkModule = module {
+val NetworkModule = module {
     single<HttpClient>(KtorClient) {
         ktorHttpClient.config {
             install(Auth)

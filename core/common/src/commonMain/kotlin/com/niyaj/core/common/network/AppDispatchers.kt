@@ -16,24 +16,10 @@
  *
  */
 
-plugins {
-    alias(libs.plugins.niyaj.kmp.library)
-    alias(libs.plugins.niyaj.kmp.koin)
+package com.niyaj.core.common.network
+
+enum class AppDispatchers {
+    Default,
+    IO,
+    Unconfined,
 }
-
-android {
-    namespace = "com.niyaj.core.analytics"
-}
-
-kotlin {
-    sourceSets {
-        commonMain.dependencies {
-
-        }
-        androidMain.dependencies {
-            implementation(libs.accompanist.pager)
-        }
-    }
-}
-
-

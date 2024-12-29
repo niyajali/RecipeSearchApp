@@ -20,6 +20,10 @@ plugins {
     alias(libs.plugins.niyaj.kmp.library)
 }
 
+android {
+    namespace = "com.niyaj.core.model"
+}
+
 kotlin {
     sourceSets {
         commonMain.dependencies {

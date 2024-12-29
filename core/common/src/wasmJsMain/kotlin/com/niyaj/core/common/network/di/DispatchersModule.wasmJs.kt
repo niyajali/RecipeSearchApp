@@ -16,24 +16,16 @@
  *
  */
 
-plugins {
-    alias(libs.plugins.niyaj.kmp.library)
-    alias(libs.plugins.niyaj.kmp.koin)
-}
+package com.niyaj.core.common.network.di
 
-android {
-    namespace = "com.niyaj.core.analytics"
-}
+import com.niyaj.core.common.network.AppDispatchers
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import org.koin.core.module.Module
+import org.koin.core.qualifier.named
+import org.koin.dsl.module
 
-kotlin {
-    sourceSets {
-        commonMain.dependencies {
-
-        }
-        androidMain.dependencies {
-            implementation(libs.accompanist.pager)
-        }
+actual val ioDispatcherModule: Module
+    get() = module {
+        single<CoroutineDispatcher>(named(AppDispatchers.IO.name)) { Dispatchers.Default }
     }
-}
-
-

@@ -29,6 +29,10 @@ import com.niyaj.core.data.model.toRecipeDetail
 import com.niyaj.core.data.model.toRecipes
 import com.niyaj.core.data.model.toSearchResult
 import com.niyaj.core.data.repository.RecipeRepository
+import com.niyaj.core.model.Recipe
+import com.niyaj.core.model.SearchResult
+import com.niyaj.core.model.details.RecipeDetails
+import com.niyaj.core.model.nutrition_details.NutritionDetails
 import com.niyaj.core.network.service.RecipeClient
 import com.skydoves.sandwich.getOrNull
 import com.skydoves.sandwich.message
@@ -51,7 +55,7 @@ class RecipeRepositoryImpl @Inject constructor(
     @WorkerThread
     override suspend fun getAllRandomRecipes(
         limit: Int,
-    ): Flow<Result<List<com.niyaj.core.model.Recipe>>> = flow {
+    ): Flow<Result<List<Recipe>>> = flow {
         recipeClient
             .getRandomRecipes(limit)
             .suspendOnSuccess {
@@ -63,7 +67,7 @@ class RecipeRepositoryImpl @Inject constructor(
     }.onStart { emit(Result.Loading) }.flowOn(ioDispatcher)
 
 
-    override suspend fun searchRecipes(query: String): Flow<Result<List<com.niyaj.core.model.SearchResult>>> {
+    override suspend fun searchRecipes(query: String): Flow<Result<List<SearchResult>>> {
         return flow {
             val result = recipeClient.searchRecipe(query)
 
@@ -80,7 +84,7 @@ class RecipeRepositoryImpl @Inject constructor(
     override suspend fun getRecipeDetails(
         recipeId: Int,
         includeNutrition: Boolean,
-    ): Flow<Result<com.niyaj.core.model.details.RecipeDetails>> {
+    ): Flow<Result<RecipeDetails>> {
         return flow {
             val result = recipeClient.getRecipeDetailsById(recipeId, includeNutrition)
 
@@ -96,7 +100,7 @@ class RecipeRepositoryImpl @Inject constructor(
 
     override suspend fun getNutritionDetails(
         recipeId: Int,
-    ): Flow<Result<com.niyaj.core.model.nutrition_details.NutritionDetails>> {
+    ): Flow<Result<NutritionDetails>> {
         return flow {
             val result = recipeClient.getNutritionDetails(recipeId)
 
@@ -112,7 +116,7 @@ class RecipeRepositoryImpl @Inject constructor(
 
     override suspend fun getFavouriteRecipes(
         recipesIds: List<String>,
-    ): Flow<Result<List<com.niyaj.core.model.Recipe>>> {
+    ): Flow<Result<List<Recipe>>> {
         return flow {
             recipesIds.map {
                 recipeClient.getRecipeDetailsById(it.toInt(), false)
@@ -133,7 +137,7 @@ class RecipeRepositoryImpl @Inject constructor(
     override suspend fun getSimilarRecipes(
         recipeId: Int,
         limit: Int,
-    ): Flow<Result<List<com.niyaj.core.model.Recipe>>> {
+    ): Flow<Result<List<Recipe>>> {
         return flow {
             val result = recipeClient.getSimilarRecipes(recipeId, limit)
 

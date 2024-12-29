@@ -29,7 +29,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(libs.kotlinx.coroutines.core)
-            api(libs.coil.kt)
+            api(libs.coil.kt.cmp)
             api(libs.coil.core)
             api(libs.coil.svg)
             api(libs.coil.network.ktor)

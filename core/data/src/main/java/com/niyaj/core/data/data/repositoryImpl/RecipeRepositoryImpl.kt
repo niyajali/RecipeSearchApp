@@ -29,10 +29,6 @@ import com.niyaj.core.data.model.toRecipeDetail
 import com.niyaj.core.data.model.toRecipes
 import com.niyaj.core.data.model.toSearchResult
 import com.niyaj.core.data.repository.RecipeRepository
-import com.niyaj.core.model.Recipe
-import com.niyaj.core.model.SearchResult
-import com.niyaj.core.model.details.RecipeDetails
-import com.niyaj.core.model.nutrition_details.NutritionDetails
 import com.niyaj.core.network.service.RecipeClient
 import com.skydoves.sandwich.getOrNull
 import com.skydoves.sandwich.message

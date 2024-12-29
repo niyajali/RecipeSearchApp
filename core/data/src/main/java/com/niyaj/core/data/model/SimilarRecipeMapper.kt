@@ -22,7 +22,7 @@ import com.niyaj.core.model.Recipe
 import com.niyaj.core.model.SimilarRecipe
 import com.niyaj.core.network.model.SimilarRecipeResponse
 
-fun List<SimilarRecipeResponse>.toSimilarRecipes(): List<com.niyaj.core.model.SimilarRecipe> {
+fun List<com.niyaj.core.network.model.SimilarRecipeResponse>.toSimilarRecipes(): List<com.niyaj.core.model.SimilarRecipe> {
     return map {
         com.niyaj.core.model.SimilarRecipe(
             id = it.id,
@@ -35,7 +35,7 @@ fun List<SimilarRecipeResponse>.toSimilarRecipes(): List<com.niyaj.core.model.Si
     }
 }
 
-fun List<SimilarRecipeResponse>.toRecipes(): List<com.niyaj.core.model.Recipe> {
+fun List<com.niyaj.core.network.model.SimilarRecipeResponse>.toRecipes(): List<com.niyaj.core.model.Recipe> {
     return map {
         com.niyaj.core.model.Recipe(
             id = it.id,

@@ -16,18 +16,12 @@
  *
  */
 
-package com.niyaj.core.data.model
+package com.niyaj.core.network.utils
 
-import com.niyaj.core.model.SearchResult
-import com.niyaj.core.network.model.SearchResponse
+object BaseURL {
+    private const val BASE_URL = "https://api.spoonacular.com/"
+    const val API_KEY = "e66783dcf6e44629ab8a4b8d47bdf0f8"
 
-fun com.niyaj.core.network.model.SearchResponse.toSearchResult(): List<com.niyaj.core.model.SearchResult> {
-    return this.results.map {
-        com.niyaj.core.model.SearchResult(
-            id = it.id,
-            title = it.title,
-            image = it.image,
-            imageType = it.imageType,
-        )
-    }
+    val url: String
+        get() = BASE_URL
 }

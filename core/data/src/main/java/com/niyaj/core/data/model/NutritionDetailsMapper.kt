@@ -23,7 +23,7 @@ import com.niyaj.core.model.nutrition_details.NutritionDetails
 import com.niyaj.core.network.model.nutrition_details.HealthResponse
 import com.niyaj.core.network.model.nutrition_details.NutritionDetailsResponse
 
-fun List<HealthResponse>.toGoodHealthList(): List<com.niyaj.core.model.nutrition_details.HealthDetail> {
+fun List<com.niyaj.core.network.model.nutrition_details.HealthResponse>.toGoodHealthList(): List<com.niyaj.core.model.nutrition_details.HealthDetail> {
     return map {
         com.niyaj.core.model.nutrition_details.HealthDetail(
             amount = it.amount,
@@ -34,7 +34,7 @@ fun List<HealthResponse>.toGoodHealthList(): List<com.niyaj.core.model.nutrition
     }
 }
 
-fun List<HealthResponse>.toBadHealthList(): List<com.niyaj.core.model.nutrition_details.HealthDetail> {
+fun List<com.niyaj.core.network.model.nutrition_details.HealthResponse>.toBadHealthList(): List<com.niyaj.core.model.nutrition_details.HealthDetail> {
     return map {
         com.niyaj.core.model.nutrition_details.HealthDetail(
             amount = it.amount,
@@ -45,7 +45,7 @@ fun List<HealthResponse>.toBadHealthList(): List<com.niyaj.core.model.nutrition_
     }
 }
 
-fun NutritionDetailsResponse.toNutritionDetails(): com.niyaj.core.model.nutrition_details.NutritionDetails {
+fun com.niyaj.core.network.model.nutrition_details.NutritionDetailsResponse.toNutritionDetails(): com.niyaj.core.model.nutrition_details.NutritionDetails {
     return com.niyaj.core.model.nutrition_details.NutritionDetails(
         bad = bad.toBadHealthList(),
         caloricBreakdown = caloricBreakdown.toCaloricBreakdownModel(),

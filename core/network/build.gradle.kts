@@ -17,11 +17,10 @@
  */
 
 plugins {
-    alias(libs.plugins.niyaj.android.library)
-    alias(libs.plugins.niyaj.android.library.jacoco)
-    alias(libs.plugins.niyaj.android.hilt)
+    alias(libs.plugins.niyaj.kmp.library)
+    alias(libs.plugins.ktrofit)
     id("kotlinx-serialization")
-    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -29,36 +28,57 @@ android {
         buildConfig = true
     }
     namespace = "com.niyaj.core.network"
-    testOptions {
-        unitTests {
-            isIncludeAndroidResources = true
+}
+
+kotlin {
+    sourceSets {
+        commonMain.dependencies {
+            api(projects.core.common)
+            implementation(projects.core.model)
+            implementation(projects.core.datastore)
+            implementation(libs.kotlinx.serialization.json)
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.json)
+            implementation(libs.ktor.client.logging)
+            implementation(libs.ktor.client.serialization)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.client.auth)
+            implementation(libs.ktor.serialization.kotlinx.json)
+            implementation(libs.ktorfit.lib)
+            implementation(libs.squareup.okio)
+            implementation(libs.kermit.logging)
+        }
+
+        androidMain.dependencies {
+            implementation(libs.ktor.client.okhttp)
+            implementation(libs.koin.android)
+        }
+
+        nativeMain.dependencies {
+            implementation(libs.ktor.client.darwin)
+        }
+
+        val desktopMain by getting {
+            dependencies {
+                implementation(libs.ktor.client.okhttp)
+            }
+        }
+        jsMain.dependencies {
+            implementation(libs.ktor.client.js)
+        }
+        wasmJsMain.dependencies {
+            implementation(libs.ktor.client.js)
         }
     }
 }
 
-secrets {
-    defaultPropertiesFileName = "secrets.defaults.properties"
-}
-
 dependencies {
-    api(libs.kotlinx.datetime)
-    api(projects.core.common)
-
-    implementation(libs.coil.kt)
-    implementation(libs.coil.kt.svg)
-    implementation(libs.kotlinx.serialization.json)
-    implementation(libs.okhttp.logging)
-    implementation(libs.retrofit.core)
-    implementation(libs.retrofit.converter.moshi)
-
-    implementation(libs.sandwich)
-    implementation(libs.sandwich.retrofit)
-
-    // json parsing
-    implementation(libs.moshi)
-    ksp(libs.moshi.codegen)
-
-    implementation(libs.retrofit.kotlin.serialization)
-
-    testImplementation(libs.kotlinx.coroutines.test)
+    add("kspCommonMainMetadata", libs.ktorfit.ksp)
+    add("kspAndroid", libs.ktorfit.ksp)
+    add("kspJs", libs.ktorfit.ksp)
+    add("kspWasmJs", libs.ktorfit.ksp)
+    add("kspDesktop", libs.ktorfit.ksp)
+    add("kspIosX64", libs.ktorfit.ksp)
+    add("kspIosArm64", libs.ktorfit.ksp)
+    add("kspIosSimulatorArm64", libs.ktorfit.ksp)
 }

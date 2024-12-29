@@ -16,18 +16,24 @@
  *
  */
 
-package com.niyaj.core.data.model
+package com.niyaj.core.network.model.details
 
-import com.niyaj.core.model.SearchResult
-import com.niyaj.core.network.model.SearchResponse
 
-fun com.niyaj.core.network.model.SearchResponse.toSearchResult(): List<com.niyaj.core.model.SearchResult> {
-    return this.results.map {
-        com.niyaj.core.model.SearchResult(
-            id = it.id,
-            title = it.title,
-            image = it.image,
-            imageType = it.imageType,
-        )
-    }
-}
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class TasteResponse(
+    val bitterness: Double = 0.0,
+
+    val fattiness: Double = 0.0,
+
+    val saltiness: Double = 0.0,
+
+    val savoriness: Double = 0.0,
+
+    val sourness: Double = 0.0,
+
+    val spiciness: Double = 0.0,
+
+    val sweetness: Double = 0.0,
+)

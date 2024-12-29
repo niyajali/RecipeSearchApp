@@ -16,18 +16,14 @@
  *
  */
 
-package com.niyaj.core.data.model
+package com.niyaj.core.network.model
 
-import com.niyaj.core.model.SearchResult
-import com.niyaj.core.network.model.SearchResponse
 
-fun com.niyaj.core.network.model.SearchResponse.toSearchResult(): List<com.niyaj.core.model.SearchResult> {
-    return this.results.map {
-        com.niyaj.core.model.SearchResult(
-            id = it.id,
-            title = it.title,
-            image = it.image,
-            imageType = it.imageType,
-        )
-    }
-}
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class AnalyzedInstructionsResponse(
+    val name: String,
+
+    val steps: List<StepsResponse>,
+)

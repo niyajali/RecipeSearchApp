@@ -16,18 +16,14 @@
  *
  */
 
-package com.niyaj.core.data.model
+package com.niyaj.core.network.service
 
-import com.niyaj.core.model.SearchResult
-import com.niyaj.core.network.model.SearchResponse
+import com.niyaj.core.network.KtorfitClient
 
-fun com.niyaj.core.network.model.SearchResponse.toSearchResult(): List<com.niyaj.core.model.SearchResult> {
-    return this.results.map {
-        com.niyaj.core.model.SearchResult(
-            id = it.id,
-            title = it.title,
-            image = it.image,
-            imageType = it.imageType,
-        )
+class RecipeClient(
+    private val ktorfitClient: KtorfitClient,
+) {
+    val recipeService: RecipeService by lazy {
+        ktorfitClient.recipeService
     }
 }

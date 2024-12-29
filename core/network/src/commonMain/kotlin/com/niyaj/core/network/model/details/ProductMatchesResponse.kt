@@ -16,18 +16,28 @@
  *
  */
 
-package com.niyaj.core.data.model
+package com.niyaj.core.network.model.details
 
-import com.niyaj.core.model.SearchResult
-import com.niyaj.core.network.model.SearchResponse
 
-fun com.niyaj.core.network.model.SearchResponse.toSearchResult(): List<com.niyaj.core.model.SearchResult> {
-    return this.results.map {
-        com.niyaj.core.model.SearchResult(
-            id = it.id,
-            title = it.title,
-            image = it.image,
-            imageType = it.imageType,
-        )
-    }
-}
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class ProductMatchesResponse(
+    val averageRating: Double = 0.0,
+
+    val description: String = "",
+
+    val id: Int = 0,
+
+    val imageUrl: String = "",
+
+    val link: String = "",
+
+    val price: String = "",
+
+    val ratingCount: Double = 0.0,
+
+    val score: Double = 0.0,
+
+    val title: String = "",
+)

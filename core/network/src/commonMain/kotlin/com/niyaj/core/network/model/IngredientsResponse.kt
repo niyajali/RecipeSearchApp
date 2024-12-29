@@ -16,18 +16,14 @@
  *
  */
 
-package com.niyaj.core.data.model
+package com.niyaj.core.network.model
 
-import com.niyaj.core.model.SearchResult
-import com.niyaj.core.network.model.SearchResponse
+import kotlinx.serialization.Serializable
 
-fun com.niyaj.core.network.model.SearchResponse.toSearchResult(): List<com.niyaj.core.model.SearchResult> {
-    return this.results.map {
-        com.niyaj.core.model.SearchResult(
-            id = it.id,
-            title = it.title,
-            image = it.image,
-            imageType = it.imageType,
-        )
-    }
-}
+@Serializable
+data class IngredientsResponse(
+    val id: Int? = null,
+    val name: String? = null,
+    val localizedName: String? = null,
+    val image: String? = null,
+)

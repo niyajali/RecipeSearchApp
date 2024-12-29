@@ -21,6 +21,10 @@ plugins {
     alias(libs.plugins.niyaj.kmp.koin)
 }
 
+android {
+    namespace = "com.niyaj.core.analytics"
+}
+
 kotlin {
     sourceSets {
         commonMain.dependencies {

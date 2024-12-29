@@ -17,9 +17,9 @@
  */
 
 plugins {
-    alias(libs.plugins.niyaj.android.library)
-    alias(libs.plugins.niyaj.android.library.jacoco)
-    alias(libs.plugins.niyaj.android.hilt)
+    alias(libs.plugins.niyaj.kmp.library)
+    alias(libs.plugins.niyaj.kmp.koin)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -27,19 +27,26 @@ android {
         consumerProguardFiles("consumer-proguard-rules.pro")
     }
     namespace = "com.niyaj.core.datastore"
-    testOptions {
-        unitTests {
-            isReturnDefaultValues = true
-        }
-    }
 }
 
-dependencies {
-    api(libs.androidx.dataStore.core)
-    api(projects.core.datastoreProto)
-    api(projects.core.model)
+kotlin {
+    sourceSets {
+        commonMain.dependencies {
+            implementation(libs.multiplatform.settings)
+            implementation(libs.multiplatform.settings.serialization)
+            implementation(libs.multiplatform.settings.coroutines)
+            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.kotlinx.serialization.core)
+            implementation(projects.core.model)
+            implementation(projects.core.common)
+        }
 
-    implementation(projects.core.common)
+        commonTest.dependencies {
+            implementation(libs.multiplatform.settings.test)
+        }
 
-    testImplementation(libs.kotlinx.coroutines.test)
+        desktopMain.dependencies {
+            implementation(libs.kotlinx.coroutines.swing)
+        }
+    }
 }

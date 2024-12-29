@@ -17,18 +17,19 @@
  */
 
 plugins {
-    alias(libs.plugins.niyaj.android.library)
-    alias(libs.plugins.niyaj.android.library.compose)
-    alias(libs.plugins.niyaj.android.hilt)
+    alias(libs.plugins.niyaj.kmp.library)
+    alias(libs.plugins.niyaj.kmp.koin)
 }
 
-android {
-    namespace = "com.niyaj.core.analytics"
+kotlin {
+    sourceSets {
+        commonMain.dependencies {
+
+        }
+        androidMain.dependencies {
+            implementation(libs.accompanist.pager)
+        }
+    }
 }
 
-dependencies {
-    implementation(libs.androidx.compose.runtime)
 
-    prodImplementation(platform(libs.firebase.bom))
-    prodImplementation(libs.firebase.analytics)
-}

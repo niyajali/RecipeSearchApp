@@ -57,46 +57,46 @@ import com.niyaj.core.network.model.details.WeightPerServingResponse
 import com.niyaj.core.network.model.details.WinePairingResponse
 
 
-fun UnitResponse.toUnitModel(): UnitDetail {
-    return UnitDetail(
+fun UnitResponse.toUnitModel(): com.niyaj.core.model.details.UnitDetail {
+    return com.niyaj.core.model.details.UnitDetail(
         amount = amount,
         unitLong = unitLong,
         unitShort = unitShort,
     )
 }
 
-fun MetricResponse.toMetricModel(): Metric {
-    return Metric(
+fun MetricResponse.toMetricModel(): com.niyaj.core.model.details.Metric {
+    return com.niyaj.core.model.details.Metric(
         amount = amount,
         unitLong = unitLong,
         unitShort = unitShort,
     )
 }
 
-fun MeasuresResponse.toMeasuresModel(): Measures {
-    return Measures(
+fun MeasuresResponse.toMeasuresModel(): com.niyaj.core.model.details.Measures {
+    return com.niyaj.core.model.details.Measures(
         us = us.toUnitModel(),
         metric = metric.toMetricModel(),
     )
 }
 
-fun CaloricBreakdownResponse.toCaloricBreakdownModel(): CaloricBreakdown {
-    return CaloricBreakdown(
+fun CaloricBreakdownResponse.toCaloricBreakdownModel(): com.niyaj.core.model.details.CaloricBreakdown {
+    return com.niyaj.core.model.details.CaloricBreakdown(
         percentProtein = percentProtein,
         percentFat = percentFat,
         percentCarbs = percentCarbs,
     )
 }
 
-fun WeightPerServingResponse.toWeightPerServingModel(): WeightPerServing {
-    return WeightPerServing(
+fun WeightPerServingResponse.toWeightPerServingModel(): com.niyaj.core.model.details.WeightPerServing {
+    return com.niyaj.core.model.details.WeightPerServing(
         amount = amount,
         unit = unit,
     )
 }
 
-fun NutritionResponse.toNutritionModel(): Nutrition {
-    return Nutrition(
+fun NutritionResponse.toNutritionModel(): com.niyaj.core.model.details.Nutrition {
+    return com.niyaj.core.model.details.Nutrition(
         caloricBreakdown = caloricBreakdown.toCaloricBreakdownModel(),
         flavonoids = flavonoids.toFlavonoidList(),
         ingredients = ingredients.toIngredientList(),
@@ -106,8 +106,8 @@ fun NutritionResponse.toNutritionModel(): Nutrition {
     )
 }
 
-fun TasteResponse.toTasteModel(): Taste {
-    return Taste(
+fun TasteResponse.toTasteModel(): com.niyaj.core.model.details.Taste {
+    return com.niyaj.core.model.details.Taste(
         bitterness = bitterness,
         fattiness = fattiness,
         saltiness = saltiness,
@@ -118,8 +118,8 @@ fun TasteResponse.toTasteModel(): Taste {
     )
 }
 
-fun WinePairingResponse.toWinePairingModel(): WinePairing {
-    return WinePairing(
+fun WinePairingResponse.toWinePairingModel(): com.niyaj.core.model.details.WinePairing {
+    return com.niyaj.core.model.details.WinePairing(
         pairedWines = pairedWines,
         pairingText = pairingText,
         productMatches = productMatches.toProductMatchesList(),
@@ -127,9 +127,9 @@ fun WinePairingResponse.toWinePairingModel(): WinePairing {
 
 }
 
-fun List<ExtendedIngredientResponse>.toExtendedIngredientList(): List<ExtendedIngredient> {
+fun List<ExtendedIngredientResponse>.toExtendedIngredientList(): List<com.niyaj.core.model.details.ExtendedIngredient> {
     return this.map {
-        ExtendedIngredient(
+        com.niyaj.core.model.details.ExtendedIngredient(
             aisle = it.aisle,
             amount = it.amount,
             consistency = it.consistency,
@@ -146,9 +146,9 @@ fun List<ExtendedIngredientResponse>.toExtendedIngredientList(): List<ExtendedIn
     }
 }
 
-fun List<IngredientsResponse>.toIngredientsList(): List<Ingredients> {
+fun List<IngredientsResponse>.toIngredientsList(): List<com.niyaj.core.model.details.Ingredients> {
     return this.map {
-        Ingredients(
+        com.niyaj.core.model.details.Ingredients(
             id = it.id,
             name = it.name,
             localizedName = it.localizedName,
@@ -157,9 +157,9 @@ fun List<IngredientsResponse>.toIngredientsList(): List<Ingredients> {
     }
 }
 
-fun List<StepsResponse>.toStepsList(): List<Steps> {
+fun List<StepsResponse>.toStepsList(): List<com.niyaj.core.model.details.Steps> {
     return this.map {
-        Steps(
+        com.niyaj.core.model.details.Steps(
             number = it.number,
             step = it.step,
             ingredients = it.ingredients.toIngredientsList(),
@@ -168,18 +168,18 @@ fun List<StepsResponse>.toStepsList(): List<Steps> {
     }
 }
 
-fun List<AnalyzedInstructionsResponse>.toAnalyzedInstructions(): List<AnalyzedInstructions> {
+fun List<AnalyzedInstructionsResponse>.toAnalyzedInstructions(): List<com.niyaj.core.model.details.AnalyzedInstructions> {
     return this.map {
-        AnalyzedInstructions(
+        com.niyaj.core.model.details.AnalyzedInstructions(
             name = it.name,
             steps = it.steps.toStepsList(),
         )
     }
 }
 
-fun List<FlavonoidResponse>.toFlavonoidList(): List<Flavonoid> {
+fun List<FlavonoidResponse>.toFlavonoidList(): List<com.niyaj.core.model.details.Flavonoid> {
     return this.map {
-        Flavonoid(
+        com.niyaj.core.model.details.Flavonoid(
             amount = it.amount,
             name = it.name,
             unit = it.unit,
@@ -187,9 +187,9 @@ fun List<FlavonoidResponse>.toFlavonoidList(): List<Flavonoid> {
     }
 }
 
-fun List<NutrientXResponse>.toNutrientXList(): List<NutrientX> {
+fun List<NutrientXResponse>.toNutrientXList(): List<com.niyaj.core.model.details.NutrientX> {
     return this.map {
-        NutrientX(
+        com.niyaj.core.model.details.NutrientX(
             amount = it.amount,
             name = it.name,
             unit = it.unit,
@@ -198,9 +198,9 @@ fun List<NutrientXResponse>.toNutrientXList(): List<NutrientX> {
     }
 }
 
-fun List<IngredientResponse>.toIngredientList(): List<Ingredient> {
+fun List<IngredientResponse>.toIngredientList(): List<com.niyaj.core.model.details.Ingredient> {
     return this.map {
-        Ingredient(
+        com.niyaj.core.model.details.Ingredient(
             amount = it.amount,
             id = it.id,
             name = it.name,
@@ -210,9 +210,9 @@ fun List<IngredientResponse>.toIngredientList(): List<Ingredient> {
     }
 }
 
-fun List<PropertyResponse>.toPropertyList(): List<Property> {
+fun List<PropertyResponse>.toPropertyList(): List<com.niyaj.core.model.details.Property> {
     return this.map {
-        Property(
+        com.niyaj.core.model.details.Property(
             name = it.name,
             amount = it.amount,
             unit = it.unit,
@@ -220,9 +220,9 @@ fun List<PropertyResponse>.toPropertyList(): List<Property> {
     }
 }
 
-fun List<ProductMatchesResponse>.toProductMatchesList(): List<ProductMatches> {
+fun List<ProductMatchesResponse>.toProductMatchesList(): List<com.niyaj.core.model.details.ProductMatches> {
     return this.map {
-        ProductMatches(
+        com.niyaj.core.model.details.ProductMatches(
             averageRating = it.averageRating,
             description = it.description,
             id = it.id,
@@ -236,8 +236,8 @@ fun List<ProductMatchesResponse>.toProductMatchesList(): List<ProductMatches> {
     }
 }
 
-fun RecipeDetailsResponse.toRecipeDetail(): RecipeDetails {
-    return RecipeDetails(
+fun RecipeDetailsResponse.toRecipeDetail(): com.niyaj.core.model.details.RecipeDetails {
+    return com.niyaj.core.model.details.RecipeDetails(
         aggregateLikes = aggregateLikes,
         analyzedInstructions = analyzedInstructions.toAnalyzedInstructions(),
         cheap = cheap,
@@ -281,8 +281,8 @@ fun RecipeDetailsResponse.toRecipeDetail(): RecipeDetails {
     )
 }
 
-fun RecipeDetails.toRecipeBasicDetail(): Recipe {
-    return Recipe(
+fun com.niyaj.core.model.details.RecipeDetails.toRecipeBasicDetail(): com.niyaj.core.model.Recipe {
+    return com.niyaj.core.model.Recipe(
         id = id,
         title = title,
         image = image,
@@ -293,8 +293,8 @@ fun RecipeDetails.toRecipeBasicDetail(): Recipe {
     )
 }
 
-fun RecipeDetailsResponse.toRecipe(): Recipe {
-    return Recipe(
+fun RecipeDetailsResponse.toRecipe(): com.niyaj.core.model.Recipe {
+    return com.niyaj.core.model.Recipe(
         id = id,
         title = title,
         image = image,

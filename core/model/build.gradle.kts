@@ -17,9 +17,13 @@
  */
 
 plugins {
-    alias(libs.plugins.niyaj.jvm.library)
+    alias(libs.plugins.niyaj.kmp.library)
 }
 
-dependencies {
-    api(libs.kotlinx.datetime)
+kotlin {
+    sourceSets {
+        commonMain.dependencies {
+            api(libs.kotlinx.datetime)
+        }
+    }
 }

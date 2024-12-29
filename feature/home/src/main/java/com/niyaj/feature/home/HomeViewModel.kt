@@ -74,5 +74,5 @@ class HomeViewModel @Inject constructor(
 sealed interface HomeUiState {
     data object Loading : HomeUiState
     data class Error(val message: String?) : HomeUiState
-    data class Success(val data: List<Recipe>) : HomeUiState
+    data class Success(val data: List<com.niyaj.core.model.Recipe>) : HomeUiState
 }

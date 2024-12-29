@@ -16,20 +16,19 @@
  *
  */
 
-package com.niyaj.core.analytics
+package com.niyaj.core.model.details
 
-import org.junit.Test
 
-import org.junit.Assert.*
+data class Nutrition(
+    val caloricBreakdown: com.niyaj.core.model.details.CaloricBreakdown = com.niyaj.core.model.details.CaloricBreakdown(),
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
-class ExampleUnitTest {
-    @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
-    }
-}
+    val flavonoids: List<com.niyaj.core.model.details.Flavonoid> = listOf(),
+
+    val ingredients: List<com.niyaj.core.model.details.Ingredient> = listOf(),
+
+    val nutrients: List<com.niyaj.core.model.details.NutrientX> = listOf(),
+
+    val properties: List<com.niyaj.core.model.details.Property> = listOf(),
+
+    val weightPerServing: com.niyaj.core.model.details.WeightPerServing = com.niyaj.core.model.details.WeightPerServing()
+)

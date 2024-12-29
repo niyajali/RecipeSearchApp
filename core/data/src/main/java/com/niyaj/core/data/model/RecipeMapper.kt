@@ -22,14 +22,14 @@ import com.niyaj.core.model.Recipe
 import com.niyaj.core.network.model.RecipeResponse
 import com.niyaj.core.network.model.RecipesResponse
 
-fun RecipesResponse.toRecipes(): List<Recipe> {
+fun RecipesResponse.toRecipes(): List<com.niyaj.core.model.Recipe> {
     return this.recipes.map {
         it.toRecipeModel()
     }
 }
 
-fun RecipeResponse.toRecipeModel(): Recipe {
-    return Recipe(
+fun RecipeResponse.toRecipeModel(): com.niyaj.core.model.Recipe {
+    return com.niyaj.core.model.Recipe(
         id = this.id,
         title = this.title,
         image = this.image,

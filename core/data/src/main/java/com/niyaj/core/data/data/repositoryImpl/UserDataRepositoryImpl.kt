@@ -28,7 +28,7 @@ import javax.inject.Inject
 class UserDataRepositoryImpl @Inject constructor(
     private val dataStore: UserPreferencesDataSource,
 ) : UserDataRepository {
-    override val userData: Flow<UserData> = dataStore.userData
+    override val userData: Flow<com.niyaj.core.model.UserData> = dataStore.userData
 
     override val getFavouritesRecipe: Flow<List<String>>
         get() = dataStore.userData.map { it.favouriteRecipes.toList() }

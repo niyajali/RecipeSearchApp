@@ -18,9 +18,15 @@
 
 package com.niyaj.core.model.details
 
-data class Steps(
-    val number: Int,
-    val step: String? = null,
-    val ingredients: List<Ingredients> = emptyList(),
-    val equipment: List<Ingredients> = emptyList(),
+
+data class Ingredient(
+    val amount: Double = 0.0,
+
+    val id: Int = 0,
+
+    val name: String = "",
+
+    val nutrients: List<com.niyaj.core.model.details.NutrientX> = listOf(),
+
+    val unit: String = ""
 )

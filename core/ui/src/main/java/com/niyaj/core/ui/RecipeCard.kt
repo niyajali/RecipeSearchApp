@@ -48,7 +48,7 @@ import com.niyaj.core.model.Recipe
 @Composable
 fun RecipeCard(
     modifier: Modifier = Modifier,
-    recipe: Recipe,
+    recipe: com.niyaj.core.model.Recipe,
     onClickRecipe: (Int) -> Unit,
 ) {
     OutlinedCard(

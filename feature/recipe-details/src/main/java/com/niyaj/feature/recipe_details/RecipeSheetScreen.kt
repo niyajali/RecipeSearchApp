@@ -114,7 +114,7 @@ fun RecipeSheetScreenRoute(
 @Composable
 fun RecipeSheetScreen(
     modifier: Modifier = Modifier,
-    uiState: RecipeDetails,
+    uiState: com.niyaj.core.model.details.RecipeDetails,
     nutritionState: NutritionDetailsState,
     similarRecipesState: SimilarRecipesState,
 ) {
@@ -196,7 +196,7 @@ fun RecipeSheetScreen(
 @Composable
 fun RecipeSheetBasicDetail(
     modifier: Modifier = Modifier,
-    recipe: Recipe,
+    recipe: com.niyaj.core.model.Recipe,
     onClickBtn: () -> Unit,
 ) {
     Column(
@@ -227,7 +227,7 @@ fun RecipeSheetBasicDetail(
 @Composable
 fun RecipeIngredientsCard(
     modifier: Modifier = Modifier,
-    data: List<Ingredients>,
+    data: List<com.niyaj.core.model.details.Ingredients>,
     expanded: Boolean,
     onExpandChange: () -> Unit,
     onClickBtn: () -> Unit,
@@ -279,7 +279,7 @@ fun RecipeFullDetails(
     nutritionState: NutritionDetailsState,
     instructions: String,
     summary: String,
-    equipments: List<Ingredients>,
+    equipments: List<com.niyaj.core.model.details.Ingredients>,
     expanded: Boolean,
     onExpandChange: () -> Unit,
     onClickBtn: () -> Unit,

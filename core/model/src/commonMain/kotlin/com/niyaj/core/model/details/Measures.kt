@@ -19,14 +19,8 @@
 package com.niyaj.core.model.details
 
 
-data class Ingredient(
-    val amount: Double = 0.0,
+data class Measures(
+    val metric: com.niyaj.core.model.details.Metric = com.niyaj.core.model.details.Metric(),
 
-    val id: Int = 0,
-
-    val name: String = "",
-
-    val nutrients: List<NutrientX> = listOf(),
-
-    val unit: String = ""
+    val us: com.niyaj.core.model.details.UnitDetail = com.niyaj.core.model.details.UnitDetail()
 )

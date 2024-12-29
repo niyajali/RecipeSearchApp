@@ -49,7 +49,7 @@ import com.niyaj.core.ui.R
 @Composable
 fun RecipeBasicDetails(
     modifier: Modifier = Modifier,
-    recipe: Recipe,
+    recipe: com.niyaj.core.model.Recipe,
 ) {
     Column(
         modifier = modifier,

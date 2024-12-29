@@ -21,9 +21,9 @@ package com.niyaj.core.data.model
 import com.niyaj.core.model.SearchResult
 import com.niyaj.core.network.model.SearchResponse
 
-fun SearchResponse.toSearchResult(): List<SearchResult> {
+fun SearchResponse.toSearchResult(): List<com.niyaj.core.model.SearchResult> {
     return this.results.map {
-        SearchResult(
+        com.niyaj.core.model.SearchResult(
             id = it.id,
             title = it.title,
             image = it.image,

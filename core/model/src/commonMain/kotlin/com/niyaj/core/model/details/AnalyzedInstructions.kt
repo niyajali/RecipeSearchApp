@@ -19,16 +19,8 @@
 package com.niyaj.core.model.details
 
 
-data class Nutrition(
-    val caloricBreakdown: CaloricBreakdown = CaloricBreakdown(),
+data class AnalyzedInstructions(
+    val name: String,
 
-    val flavonoids: List<Flavonoid> = listOf(),
-
-    val ingredients: List<Ingredient> = listOf(),
-
-    val nutrients: List<NutrientX> = listOf(),
-
-    val properties: List<Property> = listOf(),
-
-    val weightPerServing: WeightPerServing = WeightPerServing()
+    val steps: List<com.niyaj.core.model.details.Steps>,
 )

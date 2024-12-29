@@ -27,7 +27,7 @@ interface UserDataRepository {
     /**
      * Stream of [UserData]
      */
-    val userData: Flow<UserData>
+    val userData: Flow<com.niyaj.core.model.UserData>
 
     /**
      * Stream of Favourite Recipe Id

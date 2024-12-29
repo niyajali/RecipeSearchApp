@@ -52,7 +52,7 @@ import com.niyaj.core.ui.R
 fun RecipeIngredientsCard(
     modifier: Modifier = Modifier,
     title: String,
-    data: List<Ingredients>,
+    data: List<com.niyaj.core.model.details.Ingredients>,
 ) {
     val pagerState = rememberPagerState { data.size }
 
@@ -84,7 +84,7 @@ fun RecipeIngredientsCard(
 @Composable
 fun RecipeIngredientCard(
     modifier: Modifier = Modifier,
-    ingredient: Ingredients,
+    ingredient: com.niyaj.core.model.details.Ingredients,
 ) {
     Box(
         modifier = modifier

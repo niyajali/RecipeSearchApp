@@ -23,9 +23,9 @@ import com.niyaj.core.model.nutrition_details.NutritionDetails
 import com.niyaj.core.network.model.nutrition_details.HealthResponse
 import com.niyaj.core.network.model.nutrition_details.NutritionDetailsResponse
 
-fun List<HealthResponse>.toGoodHealthList(): List<HealthDetail> {
+fun List<HealthResponse>.toGoodHealthList(): List<com.niyaj.core.model.nutrition_details.HealthDetail> {
     return map {
-        HealthDetail(
+        com.niyaj.core.model.nutrition_details.HealthDetail(
             amount = it.amount,
             indented = it.indented,
             percentOfDailyNeeds = it.percentOfDailyNeeds,
@@ -34,9 +34,9 @@ fun List<HealthResponse>.toGoodHealthList(): List<HealthDetail> {
     }
 }
 
-fun List<HealthResponse>.toBadHealthList(): List<HealthDetail> {
+fun List<HealthResponse>.toBadHealthList(): List<com.niyaj.core.model.nutrition_details.HealthDetail> {
     return map {
-        HealthDetail(
+        com.niyaj.core.model.nutrition_details.HealthDetail(
             amount = it.amount,
             indented = it.indented,
             percentOfDailyNeeds = it.percentOfDailyNeeds,
@@ -45,8 +45,8 @@ fun List<HealthResponse>.toBadHealthList(): List<HealthDetail> {
     }
 }
 
-fun NutritionDetailsResponse.toNutritionDetails(): NutritionDetails {
-    return NutritionDetails(
+fun NutritionDetailsResponse.toNutritionDetails(): com.niyaj.core.model.nutrition_details.NutritionDetails {
+    return com.niyaj.core.model.nutrition_details.NutritionDetails(
         bad = bad.toBadHealthList(),
         caloricBreakdown = caloricBreakdown.toCaloricBreakdownModel(),
         calories = calories,

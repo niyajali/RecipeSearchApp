@@ -82,7 +82,7 @@ sealed interface SearchUIState {
 
     data class Error(val message: String) : SearchUIState
 
-    data class Success(val data: List<SearchResult>) : SearchUIState
+    data class Success(val data: List<com.niyaj.core.model.SearchResult>) : SearchUIState
 }
 
 

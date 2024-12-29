@@ -329,6 +329,11 @@ niyaj-jvm-library = { id = "niyaj.jvm.library", version = "unspecified" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 
 
+niyaj-cmp-feature = { id = "niyaj.cmp.feature", version = "unspecified" }
+niyaj-kmp-koin = { id = "niyaj.kmp.koin", version = "unspecified" }
+niyaj-kmp-library = { id = "niyaj.kmp.library", version = "unspecified" }
+
+
 # KMP & CMP Plugins
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }

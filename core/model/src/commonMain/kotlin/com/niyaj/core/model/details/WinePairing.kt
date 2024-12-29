@@ -19,8 +19,10 @@
 package com.niyaj.core.model.details
 
 
-data class Measures(
-    val metric: Metric = Metric(),
+data class WinePairing(
+    val pairedWines: List<String> = listOf(),
 
-    val us: UnitDetail = UnitDetail()
+    val pairingText: String = "",
+
+    val productMatches: List<com.niyaj.core.model.details.ProductMatches> = listOf()
 )

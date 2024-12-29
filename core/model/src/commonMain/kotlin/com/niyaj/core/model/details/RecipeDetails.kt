@@ -23,7 +23,7 @@ data class RecipeDetails(
 
     val aggregateLikes: Int = 0,
 
-    val analyzedInstructions: List<AnalyzedInstructions> = listOf(),
+    val analyzedInstructions: List<com.niyaj.core.model.details.AnalyzedInstructions> = listOf(),
 
     val cheap: Boolean = false,
 
@@ -39,7 +39,7 @@ data class RecipeDetails(
 
     val dishTypes: List<String> = listOf(),
 
-    val extendedIngredients: List<ExtendedIngredient> = listOf(),
+    val extendedIngredients: List<com.niyaj.core.model.details.ExtendedIngredient> = listOf(),
 
     val gaps: String = "",
 
@@ -59,7 +59,7 @@ data class RecipeDetails(
 
     val lowFodmap: Boolean = false,
 
-    val nutrition: Nutrition = Nutrition(),
+    val nutrition: com.niyaj.core.model.details.Nutrition = com.niyaj.core.model.details.Nutrition(),
 
     val occasions: List<String> = listOf(),
 
@@ -85,7 +85,7 @@ data class RecipeDetails(
 
     val sustainable: Boolean = false,
 
-    val taste: Taste = Taste(),
+    val taste: com.niyaj.core.model.details.Taste = com.niyaj.core.model.details.Taste(),
 
     val title: String = "",
 
@@ -99,5 +99,5 @@ data class RecipeDetails(
 
     val weightWatcherSmartPoints: Int = 0,
 
-    val winePairing: WinePairing = WinePairing()
+    val winePairing: com.niyaj.core.model.details.WinePairing = com.niyaj.core.model.details.WinePairing()
 )

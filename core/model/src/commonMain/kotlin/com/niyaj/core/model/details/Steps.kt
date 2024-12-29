@@ -18,9 +18,9 @@
 
 package com.niyaj.core.model.details
 
-
-data class AnalyzedInstructions (
-    val name : String,
-
-    val steps : List<Steps>
+data class Steps(
+    val number: Int,
+    val step: String? = null,
+    val ingredients: List<com.niyaj.core.model.details.Ingredients> = emptyList(),
+    val equipment: List<com.niyaj.core.model.details.Ingredients> = emptyList(),
 )

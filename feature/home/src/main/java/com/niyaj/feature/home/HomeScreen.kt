@@ -267,7 +267,7 @@ fun UserCard(
 @Composable
 fun PopularRecipeCard(
     modifier: Modifier = Modifier,
-    recipe: Recipe,
+    recipe: com.niyaj.core.model.Recipe,
     onClickRecipe: (Int) -> Unit,
 ) {
     var sizeImage by remember { mutableStateOf(IntSize.Zero) }

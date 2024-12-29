@@ -31,7 +31,7 @@ class UserPreferencesDataSource @Inject constructor(
 ) {
     val userData = userPreferences.data
         .map {
-            UserData(
+            com.niyaj.core.model.UserData(
                 favouriteRecipes = it.bookmarkedRecipeIdsMap.keys,
                 useDynamicColor = it.useDynamicColor,
                 shouldHideOnboarding = it.shouldHideOnboarding,

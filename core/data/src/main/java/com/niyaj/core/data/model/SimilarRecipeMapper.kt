@@ -22,9 +22,9 @@ import com.niyaj.core.model.Recipe
 import com.niyaj.core.model.SimilarRecipe
 import com.niyaj.core.network.model.SimilarRecipeResponse
 
-fun List<SimilarRecipeResponse>.toSimilarRecipes(): List<SimilarRecipe> {
+fun List<SimilarRecipeResponse>.toSimilarRecipes(): List<com.niyaj.core.model.SimilarRecipe> {
     return map {
-        SimilarRecipe(
+        com.niyaj.core.model.SimilarRecipe(
             id = it.id,
             title = it.title,
             imageType = it.imageType,
@@ -35,9 +35,9 @@ fun List<SimilarRecipeResponse>.toSimilarRecipes(): List<SimilarRecipe> {
     }
 }
 
-fun List<SimilarRecipeResponse>.toRecipes(): List<Recipe> {
+fun List<SimilarRecipeResponse>.toRecipes(): List<com.niyaj.core.model.Recipe> {
     return map {
-        Recipe(
+        com.niyaj.core.model.Recipe(
             id = it.id,
             title = it.title,
             image = it.sourceUrl ?: "",

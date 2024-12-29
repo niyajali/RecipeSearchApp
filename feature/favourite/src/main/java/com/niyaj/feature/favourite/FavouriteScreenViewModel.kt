@@ -66,5 +66,5 @@ sealed interface FavouriteUiState {
 
     data class Error(val message: String) : FavouriteUiState
 
-    data class Success(val data: List<Recipe>) : FavouriteUiState
+    data class Success(val data: List<com.niyaj.core.model.Recipe>) : FavouriteUiState
 }

@@ -116,19 +116,19 @@ class RecipeDetailsViewModel @Inject constructor(
 
 sealed interface RecipeDetailsState {
     data object Loading : RecipeDetailsState
-    data class Success(val data: RecipeDetails) : RecipeDetailsState
+    data class Success(val data: com.niyaj.core.model.details.RecipeDetails) : RecipeDetailsState
     data class Error(val message: String) : RecipeDetailsState
 }
 
 sealed interface NutritionDetailsState {
     data object Loading : NutritionDetailsState
-    data class Success(val data: NutritionDetails) : NutritionDetailsState
+    data class Success(val data: com.niyaj.core.model.nutrition_details.NutritionDetails) : NutritionDetailsState
     data class Error(val message: String) : NutritionDetailsState
 }
 
 sealed interface SimilarRecipesState {
     data object Loading : SimilarRecipesState
     data object Empty : SimilarRecipesState
-    data class Success(val data: List<Recipe>) : SimilarRecipesState
+    data class Success(val data: List<com.niyaj.core.model.Recipe>) : SimilarRecipesState
     data class Error(val message: String) : SimilarRecipesState
 }

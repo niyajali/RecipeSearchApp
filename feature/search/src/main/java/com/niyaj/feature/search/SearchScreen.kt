@@ -149,7 +149,7 @@ fun SearchScreen(
 fun SearchResultBody(
     modifier: Modifier = Modifier,
     searchQuery: String,
-    results: List<SearchResult>,
+    results: List<com.niyaj.core.model.SearchResult>,
     onSearchItemClick: (Int) -> Unit,
 ) {
     LazyColumn(
@@ -172,7 +172,7 @@ fun SearchResultBody(
 @Composable
 fun SearchResultBodyItem(
     modifier: Modifier = Modifier,
-    item: SearchResult,
+    item: com.niyaj.core.model.SearchResult,
     onSearchItemClick: (Int) -> Unit,
 ) {
     Box(

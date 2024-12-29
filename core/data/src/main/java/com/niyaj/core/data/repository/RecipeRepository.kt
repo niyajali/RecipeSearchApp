@@ -29,15 +29,15 @@ import kotlinx.coroutines.flow.Flow
 interface RecipeRepository {
 
     @WorkerThread
-    suspend fun getAllRandomRecipes(limit: Int): Flow<Result<List<Recipe>>>
+    suspend fun getAllRandomRecipes(limit: Int): Flow<Result<List<com.niyaj.core.model.Recipe>>>
 
-    suspend fun searchRecipes(query: String): Flow<Result<List<SearchResult>>>
+    suspend fun searchRecipes(query: String): Flow<Result<List<com.niyaj.core.model.SearchResult>>>
 
-    suspend fun getRecipeDetails(recipeId: Int, includeNutrition: Boolean): Flow<Result<RecipeDetails>>
+    suspend fun getRecipeDetails(recipeId: Int, includeNutrition: Boolean): Flow<Result<com.niyaj.core.model.details.RecipeDetails>>
 
-    suspend fun getNutritionDetails(recipeId: Int): Flow<Result<NutritionDetails>>
+    suspend fun getNutritionDetails(recipeId: Int): Flow<Result<com.niyaj.core.model.nutrition_details.NutritionDetails>>
 
-    suspend fun getFavouriteRecipes(recipesIds: List<String>): Flow<Result<List<Recipe>>>
+    suspend fun getFavouriteRecipes(recipesIds: List<String>): Flow<Result<List<com.niyaj.core.model.Recipe>>>
 
-    suspend fun getSimilarRecipes(recipeId: Int, limit: Int): Flow<Result<List<Recipe>>>
+    suspend fun getSimilarRecipes(recipeId: Int, limit: Int): Flow<Result<List<com.niyaj.core.model.Recipe>>>
 }
